@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="User">
+    <!-- Use type aliases to avoid typing the full classname every time. -->
+    <typeAlias alias="user" type="com.jiangnan.dal.dataobject.User"/>
+
+    <!--将user表映射到User类-->
+<resultMap id="userResult" class="user">
+
+    <result property="id" column="id"/>
+    <result property="headPhoto" column="head_photo"/>
+    <result property="reallyName" column="really_name"/>
+    <result property="email" column="email"/>
+    <result property="university" column="university"/>
+    <result property="sdescrip" column="sdescrip"/>
+    <result property="qq" column="qq"/>
+    <result property="aiNums" column="ai_nums"/>
+    <result property="userId" column="user_id"/>
+    <result property="password" column="password"/>
+
+</resultMap>
+
+    <!-- Select with no parameters using the result map for Account class. -->
+
+    <select id="selectAllUsers" resultClass="user">
+        select * from user
+    </select>
+
+    <select id="getUserByUserIdAndPassword" resultMap="userResult" parameterClass="user">
+        select * from user where user_id=#userId# and password=#password#
+    </select>
+    <select id="getUserById" resultMap="userResult" parameterClass="user">
+        select * from user where id=#id#
+    </select>
+    <select id="getUserByUserId" resultMap="userResult" parameterClass="user">
+        select * from user where user_id=#userId#
+    </select>
+
+    <insert id="addUser" parameterClass="user">
+    insert into user (user_id,password,email)
+    values (#userId#,#password#,#email#)
+    </insert>
+
+    <update id="saveUser" parameterClass="user">
+        update USER
+        set  really_name=#reallyName#,email=#email#,university=#university#,sdescrip=#sdescrip#,qq=#qq#,ai_nums=#aiNums#
+        where user_id=#userId#
+    </update>
+
+</sqlMap>

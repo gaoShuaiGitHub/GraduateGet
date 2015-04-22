@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发布记录</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="$userContent.getURI("css/postRecord.css")" rel="stylesheet" type="text/css">
+    <script src="../../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="heading" style="
+    padding-bottom: 71px;
+">
+    $control.setTemplate("home:top.vm")
+</div>
+<div class="container">
+    <div class="body">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-xs-4 col-sm-3 sidebar">
+                <div class="jumbotron">
+                    <ul class="nav nav-sidebar">
+                        <li><a href="$userPersonalInfoLink">个人信息<span class="sr-only">(current)</span></a></li>
+                        <li><a href="$postJobLink">发布内推</a></li>
+                        <li><a href="$editResumeLink">简历编辑</a></li>
+                        <li><a href="$aiRecommendationLink">智能推荐</a></li>
+                        <li><a href="$deliveryRecordLink">投递记录</a></li>
+                        <li><a href="$deliveryResumeLink">接受简历</a></li>
+                        <li class="active"><a href="$postRecordLink">发布记录</a></li>
+                    </ul>
+                </div>
+                <!--/jumbotron-->
+            </div>
+
+            <div class="col-xs-16 col-sm-9">
+                <div class="jumbotron">
+                    <div class="main">
+                        <form class="form-horizontal">
+                            <h3>发布记录</h3>
+                            <div class="row">
+                                <div class="col-xs-10 col-lg-12">
+                                    <ul class="list-group">
+                                        #foreach ($job in $jobs)
+                                            <li class="list-group-item">
+                                                <a href="$jobInfoLink.addQueryData("id", $!job.id)  "title="$!job.jobName">$!job.jobName</a>
+                                                <div style="color: darkslategrey">公司：$!job.company</div>
+                                                <div style="color: coral">地址：$!job.address</div>
+                                                <div style="color: #6869ff">薪资：$!job.minMoney  ~ $!job.maxMoney</div>
+                                                <div style="color: #6869ff">发布时间：$!job.time</div>
+
+                                            </li>
+                                        #end
+                                    </ul>
+                                </div>
+                                <!--/.col-xs-6.col-lg-4-->
+                            </div>
+                            <!--/row-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/jumbotron-->
+    </div><!--body-->
+</div><!--container-->
+
+<div class="footer" style="
+    width: 100%;
+    height: 70px;
+    background-color: rgb(42, 42, 79);
+">
+    $control.setTemplate("home:bootom.vm")
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>职位信息</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="$jobContent.getURI("css/jobInfo.css")" rel="stylesheet" type="text/css">
+    <script src="../../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="heading" style="
+    padding-bottom: 71px;
+">
+    $control.setTemplate("home:top.vm")
+</div>
+<div class="container">
+    <div class="body">
+        <input type="hidden" name="sendResult" id="sendResult" value="$!result"/>
+        <input type="hidden" name="errorMessage" id="errorMessage" value="$!errorMessage"/>
+
+        <form action="$jobInfoLink" method="post">
+            <input type="hidden" name="action" value="SendResumeAction">
+            <input type="hidden" name="id" value="$job.id">
+            <input type="hidden" name="userId" value="$user.userId">
+
+            <div class="row row-offcanvas row-offcanvas-right">
+                <div class="col-xs-12 col-sm-8">
+                    <div class="jumbotron">
+                        <h3 style="color: darkslategrey">$!job.jobName</h3>
+
+                        <form class="form-horizontal">
+                            <form class="form-group">
+                                <div style="color: darkslategrey">内推人：$!user.reallyName</div>
+                                <div style="color: #6869ff">薪资：$!job.minMoney  ~ $!job.maxMoney</div>
+                                <div style="color: coral">发帖时间：$!job.time</div>
+                            </form>
+                            <form class="form-group">
+                                <div style="color: #6869ff">公司名称：$!job.company</div>
+                                <div style="color: #6869ff">地点：$!job.address</div>
+                            </form>
+                            <div style="color: #6869ff">学长所属学校：$!user.university</div>
+                        </form>
+                    </div>
+                    <!--/jumbotron-->
+
+                    <div class="jumbotron">
+                        <h4>职位信息：</h4>
+                        <pre><div style="color: #6869ff" id="jobReq">$!job.jobReq</div></pre>
+                    </div>
+                    <!--/jumbotron-->
+
+                    <div class="jumbotron">
+                        <h4>职位要求摘要：</h4>
+
+                        <div style="color: #6869ff">$!job.reqSummary</div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <input class="btn btn-primary" type="submit" style="margin-left: 100px;"
+                               name="event_submit_do_sendResume" value="发送简历">
+                        <a type="button" class="btn btn-primary" href="$homepageLink" style="
+    margin-left: 200px;
+">返回首页</a>
+                    </div>
+                    <!--/jumbotron-->
+                </div>
+                <!--/.col-xs-12.col-sm-9-->
+            </div>
+    </div>
+    <!--body-->
+</div>
+<!--container-->
+<div class="footer" style="
+    width: 100%;
+    height: 70px;
+    background-color: rgb(42, 42, 79);
+">
+    $control.setTemplate("home:bootom.vm")
+</div>
+
+<script type="text/javascript">
+    $(function () {
+                var _result = $("#sendResult").val();
+                var _errorMessage = $("#errorMessage").val();
+                if (_result=="failed")
+                    alert(_errorMessage);
+                else if (_result=="success") {
+                    alert(_errorMessage)
+                    window.location.href ='$!homepageLink';
+                }
+            }
+    );
+    //HTML转义
+    function HTMLEncode(html) {
+        var temp = document.createElement("div");
+        (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+        var output = temp.innerHTML;
+        temp = null;
+        return output;
+    }
+
+    //HTML反转义
+    function HTMLDecode(text) {
+        var temp = document.createElement("div");
+        temp.innerHTML = text;
+        var output = temp.innerText || temp.textContent;
+        temp = null;
+        return output;
+    }
+    ##    document.getElementById("jobReq").innerHTML=HTMLDecode("$!job.jobReq");
+</script>
+</body>
+</html>

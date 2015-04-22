@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns:uri-interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
+             xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+                 http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:uris>
+        <uris:uri id="server" requestAware="true"/>
+        <!--home-->
+        <uris:turbine-uri id="homeModule" exposed="true" extends="server">
+            <componentPath>/</componentPath>
+        </uris:turbine-uri>
+
+        <uris:turbine-content-uri id="homeContent" exposed="true" extends="homeModule">
+            <componentPath>/home</componentPath>
+        </uris:turbine-content-uri>
+
+        <!--user-->
+        <uris:turbine-uri id="userModule" exposed="true" extends="server">
+            <componentPath>/</componentPath>
+        </uris:turbine-uri>
+
+        <uris:turbine-content-uri id="userContent" exposed="true" extends="userModule">
+            <componentPath>/user</componentPath>
+        </uris:turbine-content-uri>
+
+        <!--job-->
+        <uris:turbine-uri id="jobModule" exposed="true" extends="server">
+            <componentPath>/</componentPath>
+        </uris:turbine-uri>
+
+        <uris:turbine-content-uri id="jobContent" exposed="true" extends="jobModule">
+            <componentPath>/job</componentPath>
+        </uris:turbine-content-uri>
+
+        <!-- ================================================================ -->
+        <!-- Link Level： 继承前述各类links。                                 -->
+        <!--                                                                  -->
+        <!-- 使用方法： link                                                  -->
+        <!-- ================================================================ -->
+        <uris:turbine-uri id="homepageLink" exposed="true" extends="homeContent">
+            <target>homepage.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="registerLink" exposed="true" extends="homeContent">
+            <target>register.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="loginLink" exposed="true" extends="userContent">
+            <target>login.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="userPersonalInfoLink" exposed="true" extends="userContent">
+            <target>personalInfo.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="aiRecommendationLink" exposed="true" extends="userContent">
+            <target>aiRecommendation.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="deliveryRecordLink" exposed="true" extends="userContent">
+            <target>deliveryRecord.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="deliveryResumeLink" exposed="true" extends="userContent">
+            <target>deliveryResume.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="resumeLink" exposed="true" extends="userContent">
+            <target>resumeInfo.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="postRecordLink" exposed="true" extends="userContent">
+            <target>postRecord.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="editResumeLink" exposed="true" extends="userContent">
+            <target>editResume.vm</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="postJobLink" exposed="true" extends="userContent">
+            <target>postJob.vm</target>
+        </uris:turbine-uri>
+
+        <uris:turbine-uri id="jobInfoLink" exposed="true" extends="jobContent">
+            <target>jobInfo.vm</target>
+        </uris:turbine-uri>
+    </services:uris>
+
+</beans:beans>

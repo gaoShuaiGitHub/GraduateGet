@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Job">
+    <!-- Use type aliases to avoid typing the full classname every time. -->
+    <typeAlias alias="job" type="com.jiangnan.dal.dataobject.Job"/>
+    <typeAlias alias="searchDO" type="com.jiangnan.dal.dataobject.SearchDO"/>
+
+    <!--将job表映射到Job类-->
+    <resultMap id="jobResult" class="job">
+
+        <result property="id" column="id"/>
+        <result property="jobName" column="job_name"/>
+        <result property="company" column="company"/>
+        <result property="minMoney" column="min_money"/>
+        <result property="maxMoney" column="max_money"/>
+        <result property="address" column="address"/>
+        <result property="jobReq" column="job_req"/>
+        <result property="reqSummary" column="req_summary"/>
+        <result property="eduBackground" column="edu_background"/>
+        <result property="university" column="university"/>
+        <result property="specialty" column="specialty"/>
+        <result property="userId" column="user_id"/>
+        <result property="time" column="time"/>
+    </resultMap>
+
+    <!-- Select with no parameters using the result map for Account class. -->
+
+    <select id="selectJobList" resultClass="job" resultMap="jobResult" parameterClass="job">
+        select * from job group by TIME  ASC
+    </select>
+
+    <select id="getJobListWithPageSize" resultClass="job" resultMap="jobResult" parameterClass="Map">
+        select * from job
+        order by time desc
+        <isNotEmpty property="startRow">
+            limit #startRow# ,#pageSize#
+        </isNotEmpty>
+    </select>
+    <select id="queryJobsBySearchText" resultClass="job" resultMap="jobResult" parameterClass="Map">
+        select * from job
+        <isNotEmpty property="searchText">
+            where job_name like concat('%',#searchText#,'%')
+        </isNotEmpty>
+        order by time desc
+        <isNotEmpty property="startRow">
+            limit #startRow# ,#pageSize#
+        </isNotEmpty>
+
+    </select>
+
+    <select id="selectJobInfoById" resultClass="job" resultMap="jobResult" parameterClass="job">
+        select * from job where id=#id#
+    </select>
+
+    <select id="getJobInfoByUserId" resultClass="job" resultMap="jobResult" parameterClass="job">
+        select * from job where user_id=#userId#
+    </select>
+
+
+    <insert id="postJob" parameterClass="job">
+        insert into job (job_name,company,min_money,max_money,address,job_req,req_summary,user_id,university,edu_background,specialty,time )
+        values (#jobName#,#company#,#minMoney#,#maxMoney#,#address#,#jobReq#,#reqSummary#,#userId#,#university#,#eduBackground#,#specialty#,now())
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+
+</sqlMap>

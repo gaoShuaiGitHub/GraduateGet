@@ -1,0 +1,22 @@
+#macro(loginMessage $field)
+    #if(!$field.valid)
+        $field.message
+    #end
+#end
+
+<form class="form-horizontal" action="$loginLink" method="post">
+    $csrfToken.hiddenField
+    <input type="hidden" name="action" value="LoginAction">
+
+    #set($group=$form.login.defaultInstance)
+
+    <label class="">欢迎来到应届生内推网!</label>
+    <a href="$userPersonalInfoLink.addQueryData("userId", $!user.userId)"><h3>个人信息：</h3></a>
+    <div style="color: #67aaff">姓名：$!user.reallyName</div>
+    <div style="color: #2078ff">母校：$!user.university</div>
+    <div style="color: #4d15ff">邮箱：$!user.email</div>
+    <div style="color: #2040ff">简介：$!user.sdescrip</div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" name="event_submit_do_loginOut" value="退出"></input>
+    </div>
+</form>

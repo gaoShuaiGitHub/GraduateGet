@@ -1,0 +1,8 @@
+#foreach ($job in $jobs)
+<li class="list-group-item">
+    <a href="$jobInfoLink.addQueryData("id", $!job.id)  "title="$!job.jobName">$!job.jobName</a>
+    <div style="color: darkslategrey">公司：$!job.company</div>
+    <div style="color: coral">地址：$!job.address</div>
+    <div style="color: #6869ff">薪资：$!job.minMoney  ~ $!job.maxMoney</div>
+</li>
+#end

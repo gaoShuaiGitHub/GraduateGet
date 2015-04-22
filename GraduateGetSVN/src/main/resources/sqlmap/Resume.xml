@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Resume">
+    <!-- Use type aliases to avoid typing the full classname every time. -->
+    <typeAlias alias="Resume" type="com.jiangnan.dal.dataobject.Resume"/>
+
+    <!--将job表映射到Job类-->
+    <resultMap id="resumeResult" class="Resume">
+
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="birthday" column="birthday"/>
+        <result property="company" column="company"/>
+        <result property="city" column="city"/>
+        <result property="minMoney" column="min_money"/>
+        <result property="maxMoney" column="max_money"/>
+        <result property="experience" column="experience"/>
+        <result property="eduBackground" column="edu_background"/>
+        <result property="university" column="university"/>
+        <result property="specialty" column="specialty"/>
+
+    </resultMap>
+
+    <!-- Select with no parameters using the result map for Account class. -->
+
+    <update id="insertEditResume" parameterClass="Resume">
+        update into resume (user_id,name,phone,email,birthday,company,city,min_money,max_money,experience,edu_background,university,specialty)
+        values (#userId#,#name#,#phone#,#email#,#birthday#,#company#,#city#,#minMoney#,#maxMoney#,#experience#,#eduBackground#,#university#,#specialty#)
+    </update>
+
+    <update id="updateEditResume" parameterClass="Resume">
+        update  resume
+        SET
+        name=#name#,
+        phone=#phone#,
+        email=#email#,
+        birthday=#birthday#,
+        company=#company#,
+        city=#city#,
+        min_money=#minMoney#,
+        max_money=#maxMoney#,
+        experience=#experience#,
+        edu_background=#eduBackground#,
+        university=#university#,
+        specialty=#specialty#
+        WHERE user_id=#userId#
+    </update>
+
+    <select id="getUserResumeByUserId" resultMap="resumeResult" parameterClass="Resume">
+        select * from resume where user_id=#userId#
+    </select>
+</sqlMap>

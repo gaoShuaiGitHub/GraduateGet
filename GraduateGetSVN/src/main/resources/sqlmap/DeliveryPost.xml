@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="DeliveryPost">
+    <!-- Use type aliases to avoid typing the full classname every time. -->
+    <typeAlias alias="deliveryPost" type="com.jiangnan.dal.dataobject.DeliveryPost"/>
+
+    <!--将job表映射到Job类-->
+    <resultMap id="deliveryPostResult" class="DeliveryPost">
+
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="university" column="university"/>
+        <result property="specialty" column="specialty"/>
+        <result property="jobId" column="job_id"/>
+        <result property="jobName" column="job_name"/>
+        <result property="flag" column="flag"/>
+        <result property="flag" column="flag"/>
+        <result property="time" column="time"/>
+    </resultMap>
+
+    <!-- Select with no parameters using the result map for Account class. -->
+
+    <insert id="addDeliveryRecord" parameterClass="deliveryPost">
+        insert into delivery_post (user_id,user_name,university,specialty,job_id,job_name,flag,time)
+        values (#userId#,#userName#,#university#,#specialty#,#jobId#,#jobName#,#flag#,now())
+    </insert>
+
+    <select id="queryJobListByUserId" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">
+        select * from delivery_post where user_id=#userId# AND flag=#flag#
+    </select>
+
+    <select id="getJobInfoByJobId" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">
+        select * from delivery_post where job_id=#jobId# AND flag=#flag#
+    </select>
+
+    <select id="deliveryNumsCountJobName" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">
+        select *  from delivery_post where flag=#flag# and user_id=#userId# group by job_name order by count(*) DESC limit 5
+    </select>
+
+    <select id="getMaxUniversity" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">
+        select *  from delivery_post where flag=1 group by university order by count(*) DESC limit 3
+    </select>
+
+    <select id="getMaxJobName" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">
+        select *  from delivery_post where flag=1 group by job_name order by count(*) DESC limit 5
+    </select>
+
+    <select id="getCheckSendInfoByJobIdAndUserId" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="map">
+        select *  from delivery_post where job_id=#jobId# AND  user_id=#userId#
+    </select>
+
+</sqlMap>

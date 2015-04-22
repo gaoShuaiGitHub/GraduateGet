@@ -1,0 +1,37 @@
+
+<script src="../../../js/jquery-2.1.3.min.js"></script>
+<script src="../../../dist/js/bootstrap.min.js"></script>
+<form class="form-horizontal" action="$loginLink" method="post">
+    <input type="hidden" name="action" value="LoginAction">
+
+    <label class="">欢迎来到应届生内推网!</label>
+    <label class="">用户登录：</label>
+
+    <div class="form-group">
+        <label class="sr-only">账号</label>
+        <input type="text" class="form-control" name="userId" id="userId" placeholder="账号">
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only">密码</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="密码">
+    </div>
+##    <div style="color: red">$!errorMessage</div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" name="event_submit_do_login" value="登录" style="
+    margin-left: 40px;
+"></input>
+        <a type="button" class="btn btn-primary" href="$registerLink" style="
+    margin-left: 70px;
+">注册</a>
+    </div>
+</form>
+
+##<script type="text/javascript">
+##    $(function () {
+##        var loginResult = $("#loginResult").val();
+##        var _errorMessage = $("#errorMessage").val();
+##        if (loginResult=="failed")
+##            alert(_errorMessage);
+##    });
+##</script>

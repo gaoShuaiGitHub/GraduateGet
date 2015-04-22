@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>简历编辑</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="$userContent.getURI("css/editResume.css")" rel="stylesheet" type="text/css">
+    <script src="../../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="heading" style="
+    padding-bottom: 71px;
+">
+    $control.setTemplate("home:top.vm")
+</div>
+<div class="container">
+    <div class="body">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-xs-4 col-sm-3 sidebar">
+                <div class="jumbotron">
+                    <ul class="nav nav-sidebar">
+                        <li><a href="$userPersonalInfoLink">个人信息<span class="sr-only">(current)</span></a></li>
+                        <li><a href="$postJobLink">发布内推</a></li>
+                        <li class="active"><a href="$editResumeLink">简历编辑</a></li>
+                        <li><a href="$aiRecommendationLink">智能推荐</a></li>
+                        <li><a href="$deliveryRecordLink">投递记录</a></li>
+                        <li><a href="$deliveryResumeLink">接受简历</a></li>
+                        <li><a href="$postRecordLink">发布记录</a></li>
+                    </ul>
+                </div>
+                <!--/jumbotron-->
+            </div>
+
+            <div class="col-xs-16 col-sm-9">
+                <div class="jumbotron">
+                    <div class="main">
+                        <form class="form-horizontal" action="$editResumeLink" method="post">
+                            <input type="hidden" name="action" value="EditResumeAction">
+                            <input type="hidden" name="result" value="$!result">
+
+                            <h3>简历编辑</h3>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" style="
+    text-align: center;
+">姓名：</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="name" name="name" value="$!resume.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" style="
+    text-align: center;
+">手机：</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                           value="$!resume.phone">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" style="
+    text-align: center;
+">邮箱：</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="email" name="email"
+                                           value="$!resume.email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2" style="
+    text-align: center;
+">出生年月：</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="birthday" name="birthday"
+                                           value="$!resume.birthday">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2" style="
+    text-align: center;
+">当前公司：</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="company" name="company"
+                                           value="$!resume.company">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2" style="
+    text-align: center;
+">所在城市：</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="city" name="city" value="$!resume.city">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" style="
+    text-align: center;
+">薪资：</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="minMoney" name="minMoney"
+                                           value="$!resume.minMoney">
+                                </div>
+                                <div>
+                                    <label class="col-sm-1 control-label" style="
+    text-align: center;
+">~</label>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="maxMoney" name="maxMoney"
+                                           value="$!resume.maxMoney">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2" style="
+    text-align: center;
+">经历：</label>
+
+                                <div class="col-sm-12">
+            <textarea class="form-control" rows="10" id="experience" name="experience" style="
+    margin-left: 123px;
+    width: 83%;
+"
+                    >$!resume.experience</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2" style="
+    text-align: center;
+">学历：</label>
+
+                                <div class="col-sm-1">
+                                    <select id="eduBackground" name="eduBackground">
+                                        #if($!resume.eduBackground=="1")
+                                            <option selected value="1">专科</option>
+                                            <option value="2">本科</option>
+                                            <option value="3">硕士</option>
+                                            <option value="4">博士</option>
+                                            <option value="0">其他</option>
+                                        #elseif($!resume.eduBackground=="2")
+                                            <option value="1">专科</option>
+                                            <option selected value="2">本科</option>
+                                            <option value="3">硕士</option>
+                                            <option value="4">博士</option>
+                                            <option value="0">其他</option>
+                                        #elseif($!resume.eduBackground=="3")
+                                            <option value="1">专科</option>
+                                            <option value="2">本科</option>
+                                            <option selected value="3">硕士</option>
+                                            <option value="4">博士</option>
+                                            <option value="0">其他</option>
+                                        #elseif($!resume.eduBackground=="4")
+                                            <option value="1">专科</option>
+                                            <option value="2">本科</option>
+                                            <option selected value="3">硕士</option>
+                                            <option value="4">博士</option>
+                                            <option value="0">其他</option>
+                                        #elseif($!resume.eduBackground=="0")
+                                            <option value="1">专科</option>
+                                            <option value="2">本科</option>
+                                            <option value="3">硕士</option>
+                                            <option value="4">博士</option>
+                                            <option selected value="others">其他</option>
+                                        #else
+                                            <option value="1">专科</option>
+                                            <option value="2">本科</option>
+                                            <option value="3">硕士</option>
+                                            <option value="4">博士</option>
+                                            <option value="0">其他</option>
+                                        #end
+
+                                    </select>
+                                </div>
+
+                                <label class="col-sm-2" style="
+    text-align: center;
+">学校：</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="university" name="university"
+                                           value="$!resume.university">
+                                </div>
+                                <label class="col-sm-2 " style="
+    text-align: center;
+">专业：</label>
+
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="specialty" name="specialty"
+                                           value="$!resume.specialty">
+                                </div>
+                            </div>
+                            <input class="btn btn-primary" type="submit" style="margin-left: 200px;"
+                                   name="event_submit_do_editResume"
+                                   value="保存简历">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/jumbotron-->
+    </div>
+    <!--body-->
+</div>
+<!--container-->
+
+<div class="footer" style="
+    width: 100%;
+    height: 70px;
+    background-color: rgb(42, 42, 79);
+">
+    $control.setTemplate("home:bootom.vm")
+</div>
+
+<script type="text/javascript">
+    $(function(){
+       var result=$("#result").val();
+        if(result=="success"){
+            alert("保存成功啦，赶快去找一下适合你的职位吧！");
+        }
+        else if(result=="failed"){
+            alert("简历木有保存成功，是不是不够完善呢，请检查一下后稍后再试下哈！");
+        }
+    });
+</script>
+</body>
+</html>
