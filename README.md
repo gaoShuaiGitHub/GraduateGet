@@ -1,3 +1,2 @@
 # GraduateGet
-学习github
-commit
+这是我编写的毕设的源码
