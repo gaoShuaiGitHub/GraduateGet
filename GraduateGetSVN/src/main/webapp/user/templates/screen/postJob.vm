@@ -142,7 +142,7 @@
 
 
                             <input class="btn btn-primary" type="submit" style="margin-left: 200px;"
-                                   name="event_submit_do_postJob" value="发布内推">
+                                   name="event_submit_do_postJob"  onclick="return clickCheck()" value="发布内推">
                             <a style="margin-left: 200px;" href="$homepageLink" type="button" class="btn btn-primary">取消发布</a>
                         </form>
                     </div>
@@ -173,8 +173,54 @@
                     alert("职位发布成功啦，静静滴等待学弟们投递简历吧！");
                 }
             }
-    )
-    ;
+    );
+
+    //是否为空
+    function stringIsNull(str) {
+        if (str == "")
+            return true;
+        else
+            return false;
+    }
+
+    //检验是否全由数字组成
+    function isDigit(temp) {
+        var reg = /^[0-9]*$/;
+        return reg.test(temp);
+    }
+
+    function clickCheck() {
+        var jobName = $("#jobName").val();
+        var company = $("#company").val();
+        var minMoney = $("#minMoney").val();
+        var maxMoney = $("#maxMoney").val();
+        var address = $("#address").val();
+        var jobReq = $("#jobReq").val();
+        var reqSummary = $("#reqSummary").val();
+        var specialty = $("#specialty").val();
+        if (stringIsNull(jobName)) {
+            alert("职位名称不能为空！");
+            return false;
+        }if (stringIsNull(company)) {
+            alert("公司名称不能为空！");
+            return false;
+        }if (stringIsNull(minMoney)||stringIsNull(maxMoney)) {
+            alert("薪资都不能为空！");
+            return false;
+        }if (stringIsNull(address)) {
+            alert("地址不能为空！");
+            return false;
+        }if (stringIsNull(jobReq)) {
+            alert("工作要求不能为空！");
+            return false;
+        }if (stringIsNull(reqSummary)) {
+            alert("职位摘要不能为空！");
+            return false;
+        }if (stringIsNull(specialty)) {
+            alert("专业不能为空！");
+            return false;
+        }
+    }
 </script>
 </body>
 </html>

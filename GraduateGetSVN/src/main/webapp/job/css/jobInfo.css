@@ -7,3 +7,31 @@ body{
 body{
     padding-bottom: 0px;
 }
+.company_tags_wrap {
+    margin-top: -10px;
+    min-height: 10px;
+}
+.company_list {
+    position: relative;
+    left: -3px;
+    overflow: hidden;
+    width: 510px;
+    padding-top: 8px;
+}
+.clearfix {
+    zoom: 1;
+}
+
+.company_list li.company_tag {
+    float: left;
+    display: inline;
+    color: gray;
+    font-size: 12px;
+    position: relative;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
+    border: 1px solid #cacaca;
+    background-color: white;
+    margin: 0 9px 10px 3px;
+}

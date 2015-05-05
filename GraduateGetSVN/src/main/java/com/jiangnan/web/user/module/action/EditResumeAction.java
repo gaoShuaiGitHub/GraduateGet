@@ -22,7 +22,6 @@ public class EditResumeAction {
                             @Param("phone") String phone,
                             @Param("email") String email,
                             @Param("birthday") String birthday,
-                            @Param("company") String company,
                             @Param("city") String city,
                             @Param("minMoney") Integer minMoney,
                             @Param("maxMoney") Integer maxMoney,
@@ -47,7 +46,6 @@ public class EditResumeAction {
             resume.setPhone(phone);
             resume.setEmail(email);
             resume.setBirthday(birthday);
-            resume.setCompany(company);
             resume.setCity(city);
             resume.setMinMoney(minMoney);
             resume.setMaxMoney(maxMoney);
