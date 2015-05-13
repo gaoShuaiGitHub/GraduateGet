@@ -4,8 +4,8 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.job.home.JobManager;
 import com.jiangnan.biz.user.UserManager;
-import com.jiangnan.dal.dataobject.Job;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.JobDO;
+import com.jiangnan.dal.dataobject.UserDO;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class JobInfo {
     @Autowired
     private UserManager userManager;
 
-    private Job job=new Job();
-    private User user=new User();
+    private JobDO jobDO =new JobDO();
+    private UserDO userDO =new UserDO();
 
     public void execute(Context context, @Param("id") Integer id,
                         HttpSession session) {
@@ -33,14 +33,14 @@ public class JobInfo {
         }else{
             context.put("loginResult","failed");
         }
-        job = jobManager.getJobInfoById(id);
-        System.out.println("job="+job);
-        if(job!=null) {
-            user = userManager.getUserByUserId(job.getUserId());
-        context.put("job",job);
+        jobDO = jobManager.getJobInfoById(id);
+        System.out.println("job="+ jobDO);
+        if(jobDO !=null) {
+            userDO = userManager.getUserByUserId(jobDO.getUserId());
+        context.put("job", jobDO);
         }
-        if(user!=null){
-            context.put("user",user);
+        if(userDO !=null){
+            context.put("user", userDO);
         }
     }
 }

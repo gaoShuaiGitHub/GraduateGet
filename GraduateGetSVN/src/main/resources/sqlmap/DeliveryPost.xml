@@ -7,7 +7,7 @@
 
 <sqlMap namespace="DeliveryPost">
     <!-- Use type aliases to avoid typing the full classname every time. -->
-    <typeAlias alias="deliveryPost" type="com.jiangnan.dal.dataobject.DeliveryPost"/>
+    <typeAlias alias="deliveryPost" type="com.jiangnan.dal.dataobject.DeliveryPostDO"/>
 
     <!--将job表映射到Job类-->
     <resultMap id="deliveryPostResult" class="DeliveryPost">
@@ -39,7 +39,7 @@
     </select>
 
     <select id="deliveryNumsCountJobName" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">
-        select *  from delivery_post where flag=#flag# and user_id=#userId# group by job_name order by count(*) DESC limit 5
+        select *  from delivery_post where flag=#flag# and user_id=#userId# group by job_name order by count(*) DESC limit 3
     </select>
 
     <select id="getMaxUniversity" resultClass="deliveryPost" resultMap="deliveryPostResult"  parameterClass="deliveryPost">

@@ -3,13 +3,11 @@ package com.jiangnan.web.user.module.action;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.Navigator;
-import com.alibaba.citrus.turbine.dataresolver.FormField;
-import com.alibaba.citrus.turbine.dataresolver.FormGroup;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.job.home.JobManager;
 import com.jiangnan.biz.user.UserManager;
-import com.jiangnan.dal.dataobject.Job;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.JobDO;
+import com.jiangnan.dal.dataobject.UserDO;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,7 @@ public class PostJobAction {
     private Integer POST=0;
     public void doPostJob(@Param("jobName") String jobName,
                           @Param("company") String company,
+                          @Param("companySize") String companySize,
                           @Param("minMoney") Integer minMoney,
                           @Param("maxMoney") Integer maxMoney,
                           @Param("address") String address,
@@ -47,21 +46,22 @@ public class PostJobAction {
             context.put("result", "failed");
         } else {
             String userId = sessionUser.getUserId();
-            User user=userManager.getUserByUserId(userId);
-            Job job = new Job();
-            job.setUserId(userId);
-            job.setJobName(jobName);
-            job.setCompany(company);
-            job.setMinMoney(minMoney);
-            job.setMaxMoney(maxMoney);
-            job.setAddress(address);
-            job.setJobReq(jobReq);
-            job.setReqSummary(reqSummary);
-            job.setUniversity(user.getUniversity());
-            job.setEduBackground(eduBackground);
-            job.setSpecialty(specialty);
+            UserDO userDO =userManager.getUserByUserId(userId);
+            JobDO jobDO = new JobDO();
+            jobDO.setUserId(userId);
+            jobDO.setJobName(jobName);
+            jobDO.setCompany(company);
+            jobDO.setCompanySize(companySize);
+            jobDO.setMinMoney(minMoney);
+            jobDO.setMaxMoney(maxMoney);
+            jobDO.setAddress(address);
+            jobDO.setJobReq(jobReq);
+            jobDO.setReqSummary(reqSummary);
+            jobDO.setUniversity(userDO.getUniversity());
+            jobDO.setEduBackground(eduBackground);
+            jobDO.setSpecialty(specialty);
 
-            Integer jobId = jobManager.postJob(job);
+            Integer jobId = jobManager.postJob(jobDO);
             if(jobId<0){
                 context.put("result", "failed");
                 return ;
@@ -72,7 +72,7 @@ public class PostJobAction {
             } else {
                 context.put("result", "failed");
             }
-            context.put("job", job);
+            context.put("job", jobDO);
         }
     }
 }

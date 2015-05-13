@@ -7,7 +7,7 @@
 
 <sqlMap namespace="User">
     <!-- Use type aliases to avoid typing the full classname every time. -->
-    <typeAlias alias="user" type="com.jiangnan.dal.dataobject.User"/>
+    <typeAlias alias="user" type="com.jiangnan.dal.dataobject.UserDO"/>
 
     <!--将user表映射到User类-->
 <resultMap id="userResult" class="user">

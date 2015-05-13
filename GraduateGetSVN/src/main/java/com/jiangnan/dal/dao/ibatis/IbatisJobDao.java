@@ -37,25 +37,25 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
     }
 
     @Override
-    public Job getJobInfoById(Integer id) {
-        Job job = new Job();
-        job.setId(id);
-        return (Job) getSqlMapClientTemplate().queryForObject("selectJobInfoById", job);
+    public JobDO getJobInfoById(Integer id) {
+        JobDO jobDO = new JobDO();
+        jobDO.setId(id);
+        return (JobDO) getSqlMapClientTemplate().queryForObject("selectJobInfoById", jobDO);
     }
 
     @Override
     public Integer addDeliveryRecord(String userId, Integer jobId,Integer flag) {
-        DeliveryPost deliveryPost = new DeliveryPost();
-        Job job=getJobInfoById(jobId);
-        Resume userResume=userManager.getUserResumeByUserId(userId);
-        deliveryPost.setJobId(jobId);
-        deliveryPost.setUserId(userId);
-        deliveryPost.setJobName(job.getJobName());
-        deliveryPost.setUserName(userResume.getName());
-        deliveryPost.setUniversity(userResume.getUniversity());
-        deliveryPost.setSpecialty(userResume.getSpecialty());
-        deliveryPost.setFlag(flag);
-        return getSqlMapClientTemplate().update("addDeliveryRecord", deliveryPost);
+        DeliveryPostDO deliveryPostDO = new DeliveryPostDO();
+        JobDO jobDO =getJobInfoById(jobId);
+        ResumeDO userResumeDO =userManager.getUserResumeByUserId(userId);
+        deliveryPostDO.setJobId(jobId);
+        deliveryPostDO.setUserId(userId);
+        deliveryPostDO.setJobName(jobDO.getJobName());
+        deliveryPostDO.setUserName(userResumeDO.getName());
+        deliveryPostDO.setUniversity(userResumeDO.getUniversity());
+        deliveryPostDO.setSpecialty(userResumeDO.getSpecialty());
+        deliveryPostDO.setFlag(flag);
+        return getSqlMapClientTemplate().update("addDeliveryRecord", deliveryPostDO);
     }
 
     @Override
@@ -70,26 +70,26 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
 
 
     @Override
-    public Integer postJob(Job job) {
-        return getSqlMapClientTemplate().update("postJob", job);
+    public Integer postJob(JobDO jobDO) {
+        return getSqlMapClientTemplate().update("postJob", jobDO);
     }
 
     @Override
     public List getJobListByUserId(String userId, Integer flag) {
-        DeliveryPost deliveryPost = new DeliveryPost();
-        deliveryPost.setUserId(userId);
-        deliveryPost.setFlag(flag);
-        List<DeliveryPost> deliveryPost1 = (List<DeliveryPost>) getSqlMapClientTemplate().queryForList("queryJobListByUserId", deliveryPost);
-        List<Job> jobs = new ArrayList<Job>();
-        if (deliveryPost1 != null) {
-            for (int i = 0; i < deliveryPost1.size(); i++) {
-                Job job = getJobInfoById(deliveryPost1.get(i).getJobId());
-                if (job != null) {
-                    job.setTime(deliveryPost1.get(i).getTime());//设置投递时间
-                    jobs.add(job);
+        DeliveryPostDO deliveryPostDO = new DeliveryPostDO();
+        deliveryPostDO.setUserId(userId);
+        deliveryPostDO.setFlag(flag);
+        List<DeliveryPostDO> deliveryPostDO1 = (List<DeliveryPostDO>) getSqlMapClientTemplate().queryForList("queryJobListByUserId", deliveryPostDO);
+        List<JobDO> jobDOs = new ArrayList<JobDO>();
+        if (deliveryPostDO1 != null) {
+            for (int i = 0; i < deliveryPostDO1.size(); i++) {
+                JobDO jobDO = getJobInfoById(deliveryPostDO1.get(i).getJobId());
+                if (jobDO != null) {
+                    jobDO.setTime(deliveryPostDO1.get(i).getTime());//设置投递时间
+                    jobDOs.add(jobDO);
                 }
             }
-            return jobs;
+            return jobDOs;
         } else {
             return null;
         }
@@ -97,25 +97,25 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
 
     @Override
     public List getJobInfoByJobId(Integer jobId, Integer flag) {
-        DeliveryPost deliveryPost=new DeliveryPost();
-        deliveryPost.setJobId(jobId);
-        deliveryPost.setFlag(flag);
-        return getSqlMapClientTemplate().queryForList("getJobInfoByJobId",deliveryPost);
+        DeliveryPostDO deliveryPostDO =new DeliveryPostDO();
+        deliveryPostDO.setJobId(jobId);
+        deliveryPostDO.setFlag(flag);
+        return getSqlMapClientTemplate().queryForList("getJobInfoByJobId", deliveryPostDO);
     }
 
     @Override
     public List getJobInfoByUserId(String userId) {
-        Job job=new Job();
-        job.setUserId(userId);
-        return getSqlMapClientTemplate().queryForList("getJobInfoByUserId", job);
+        JobDO jobDO =new JobDO();
+        jobDO.setUserId(userId);
+        return getSqlMapClientTemplate().queryForList("getJobInfoByUserId", jobDO);
     }
 
     @Override
-    public List getDeliveryNumsCountJobName(String userId) {
-        DeliveryPost deliveryPost=new DeliveryPost();
-        deliveryPost.setUserId(userId);
-        deliveryPost.setFlag(1);
-        return getSqlMapClientTemplate().queryForList("deliveryNumsCountJobName",deliveryPost);
+    public List<JobDO> getDeliveryNumsCountJobName(String userId) {
+        DeliveryPostDO deliveryPostDO =new DeliveryPostDO();
+        deliveryPostDO.setUserId(userId);
+        deliveryPostDO.setFlag(1);
+        return (List<JobDO>) getSqlMapClientTemplate().queryForList("deliveryNumsCountJobName", deliveryPostDO);
     }
 
     @Override
@@ -128,10 +128,15 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
     }
 
     @Override
-    public DeliveryPost getCheckSendInfoByJobIdAndUserId(Integer jobId, String userId) {
+    public DeliveryPostDO getCheckSendInfoByJobIdAndUserId(Integer jobId, String userId) {
         Map map=new HashMap();
         map.put("jobId",jobId);
         map.put("userId",userId);
-        return (DeliveryPost) getSqlMapClientTemplate().queryForObject("getCheckSendInfoByJobIdAndUserId",map);
+        return (DeliveryPostDO) getSqlMapClientTemplate().queryForObject("getCheckSendInfoByJobIdAndUserId",map);
+    }
+
+    @Override
+    public List getProbabilityList() {
+        return  getSqlMapClientTemplate().queryForList("probabilityList.getProbabilityList");
     }
 }

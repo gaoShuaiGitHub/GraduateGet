@@ -1,7 +1,7 @@
 package com.jiangnan.biz.user;
 
-import com.jiangnan.dal.dataobject.Resume;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.ResumeDO;
+import com.jiangnan.dal.dataobject.UserDO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,20 +12,20 @@ public interface UserManager {
     /*
       用户登录
       */
-    public User login(String userId, String password);
+    public UserDO login(String userId, String password);
 
     /*
       用户注册
       */
     public Integer register(String userId, String password, String email);
 
-    public User getUserById(Integer id);
+    public UserDO getUserById(Integer id);
 
-    public User getUserByUserId(String userId);
+    public UserDO getUserByUserId(String userId);
 
-    public Integer savePersonInfo(User user);
+    public Integer savePersonInfo(UserDO userDO);
 
-    public Integer editResume(Resume resume);
+    public Integer editResume(ResumeDO resumeDO);
 
-    public Resume getUserResumeByUserId(String userId);
+    public ResumeDO getUserResumeByUserId(String userId);
 }

@@ -2,7 +2,6 @@ package com.jiangnan.web.user.module.screen;
 
 import com.alibaba.citrus.turbine.Context;
 import com.jiangnan.biz.job.home.JobManager;
-import com.jiangnan.dal.dataobject.Job;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;

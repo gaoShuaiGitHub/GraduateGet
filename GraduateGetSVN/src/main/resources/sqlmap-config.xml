@@ -9,4 +9,5 @@
     <sqlMap resource="sqlmap/Job.xml"/>
     <sqlMap resource="sqlmap/DeliveryPost.xml"/>
     <sqlMap resource="sqlmap/Resume.xml"/>
+    <sqlMap resource="sqlmap/ProbabilityList.xml"/>
 </sqlMapConfig>

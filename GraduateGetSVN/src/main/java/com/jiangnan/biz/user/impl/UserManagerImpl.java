@@ -2,9 +2,8 @@ package com.jiangnan.biz.user.impl;
 
 import com.jiangnan.biz.user.UserManager;
 import com.jiangnan.dal.dao.UserDao;
-import com.jiangnan.dal.dao.ibatis.IbatisUserDao;
-import com.jiangnan.dal.dataobject.Resume;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.ResumeDO;
+import com.jiangnan.dal.dataobject.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +19,9 @@ public class UserManagerImpl implements UserManager {
 
 
     @Override
-    public User login(String userId, String password) {
-        User user=userDao.getUser(userId,password);
-        return user;
+    public UserDO login(String userId, String password) {
+        UserDO userDO =userDao.getUser(userId,password);
+        return userDO;
     }
 
     @Override
@@ -31,27 +30,27 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public User getUserById(Integer id) {
+    public UserDO getUserById(Integer id) {
         return userDao.getUserById(id);
     }
 
     @Override
-    public User getUserByUserId(String userId) {
+    public UserDO getUserByUserId(String userId) {
         return userDao.getUserByUserId(userId);
     }
 
     @Override
-    public Integer savePersonInfo(User user) {
-        return userDao.savePersonInfo(user);
+    public Integer savePersonInfo(UserDO userDO) {
+        return userDao.savePersonInfo(userDO);
     }
 
     @Override
-    public Integer editResume(Resume resume) {
-        return userDao.editResume(resume);
+    public Integer editResume(ResumeDO resumeDO) {
+        return userDao.editResume(resumeDO);
     }
 
     @Override
-    public Resume getUserResumeByUserId(String userId) {
+    public ResumeDO getUserResumeByUserId(String userId) {
         return userDao.getUserResumeByUserId(userId);
     }
 }

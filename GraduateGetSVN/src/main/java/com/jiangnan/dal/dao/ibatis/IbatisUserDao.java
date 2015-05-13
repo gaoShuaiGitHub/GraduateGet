@@ -1,8 +1,8 @@
 package com.jiangnan.dal.dao.ibatis;
 
 import com.jiangnan.dal.dao.UserDao;
-import com.jiangnan.dal.dataobject.Resume;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.ResumeDO;
+import com.jiangnan.dal.dataobject.UserDO;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Component;
 
@@ -15,60 +15,60 @@ import java.util.List;
 public class IbatisUserDao extends SqlMapClientDaoSupport implements UserDao {
 
     @Override
-    public List<User> getAllUser() {
+    public List<UserDO> getAllUser() {
         return null;
     }
 
     @Override
-    public User getUser(String userId, String password) {
-        User user = new User();
-        user.setUserId(userId);
-        user.setPassword(password);
-        return (User) getSqlMapClientTemplate().queryForObject("getUserByUserIdAndPassword", user);
+    public UserDO getUser(String userId, String password) {
+        UserDO userDO = new UserDO();
+        userDO.setUserId(userId);
+        userDO.setPassword(password);
+        return (UserDO) getSqlMapClientTemplate().queryForObject("getUserByUserIdAndPassword", userDO);
     }
 
     @Override
-    public User getUserById(Integer id) {
-        User user=new User();
-        user.setId(id);
-        return (User)getSqlMapClientTemplate().queryForObject("getUserById",user);
+    public UserDO getUserById(Integer id) {
+        UserDO userDO =new UserDO();
+        userDO.setId(id);
+        return (UserDO)getSqlMapClientTemplate().queryForObject("getUserById", userDO);
     }
 
     @Override
     public Integer addUser(String userId, String password, String email) {
-        User user=new User();
-        user.setUserId(userId);
-        user.setPassword(password);
-        user.setEmail(email);
-        return getSqlMapClientTemplate().update("addUser",user);
+        UserDO userDO =new UserDO();
+        userDO.setUserId(userId);
+        userDO.setPassword(password);
+        userDO.setEmail(email);
+        return getSqlMapClientTemplate().update("addUser", userDO);
     }
 
     @Override
-    public User getUserByUserId(String userId) {
-        User user=new User();
-        user.setUserId(userId);
-        return (User)getSqlMapClientTemplate().queryForObject("getUserByUserId",user);
+    public UserDO getUserByUserId(String userId) {
+        UserDO userDO =new UserDO();
+        userDO.setUserId(userId);
+        return (UserDO)getSqlMapClientTemplate().queryForObject("getUserByUserId", userDO);
     }
 
     @Override
-    public Integer savePersonInfo(User user) {
-        return getSqlMapClientTemplate().update("saveUser",user);
+    public Integer savePersonInfo(UserDO userDO) {
+        return getSqlMapClientTemplate().update("saveUser", userDO);
     }
 
     @Override
-    public Integer editResume(Resume resume) {
-        Resume resume1=getUserResumeByUserId(resume.getUserId());
-        if(resume1!=null){
-            return getSqlMapClientTemplate().update("updateEditResume",resume);
+    public Integer editResume(ResumeDO resumeDO) {
+        ResumeDO resumeDO1 =getUserResumeByUserId(resumeDO.getUserId());
+        if(resumeDO1 !=null){
+            return getSqlMapClientTemplate().update("updateEditResume", resumeDO);
         }else{
-            return getSqlMapClientTemplate().update("insertEditResume",resume);
+            return getSqlMapClientTemplate().update("insertEditResume", resumeDO);
         }
     }
 
     @Override
-    public Resume getUserResumeByUserId(String userId) {
-        Resume resume=new Resume();
-        resume.setUserId(userId);
-        return (Resume) getSqlMapClientTemplate().queryForObject("getUserResumeByUserId",resume);
+    public ResumeDO getUserResumeByUserId(String userId) {
+        ResumeDO resumeDO =new ResumeDO();
+        resumeDO.setUserId(userId);
+        return (ResumeDO) getSqlMapClientTemplate().queryForObject("getUserResumeByUserId", resumeDO);
     }
 }

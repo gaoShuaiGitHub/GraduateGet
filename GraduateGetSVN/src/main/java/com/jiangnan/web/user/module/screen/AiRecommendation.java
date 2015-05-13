@@ -1,7 +1,6 @@
 package com.jiangnan.web.user.module.screen;
 
 import com.alibaba.citrus.turbine.Context;
-import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.job.home.JobManager;
 import com.jiangnan.biz.user.UserManager;
 import com.jiangnan.dal.dataobject.*;
@@ -27,19 +26,15 @@ public class AiRecommendation {
                         Context context) {
         List jobs = new ArrayList();
         SessionUser sessionUser = (SessionUser) session.getAttribute(WebConstant.SESSION_USER_SESSION_KEY);
-        List<Job> jobList = jobManager.getJobList();
-        Resume resumeInfo = userManager.getUserResumeByUserId(sessionUser.getUserId());
-        User user = userManager.getUserByUserId(sessionUser.getUserId());
-        List<DeliveryPost> jobNameList = jobManager.getDeliveryNumsCountJobName(sessionUser.getUserId());
-        HashMap<String, Integer> hm = getJobNameNums(jobNameList);
-        List<AiResult<Job>> aiResultLists = countAiNums(hm, jobList, resumeInfo).subList(0, user.getAiNums());
-        context.put("aiResultLists", aiResultLists);
+        ResumeDO resumeDOInfo = userManager.getUserResumeByUserId(sessionUser.getUserId());
+        List<AiResultDO<JobDO>> aiResultDOLists = jobManager.calculationMatching(resumeDOInfo);
+        context.put("aiResultLists", aiResultDOLists);
     }
 
-    public HashMap<String, Integer> getJobNameNums(List<DeliveryPost> jobNameList) {
+    public HashMap<String, Integer> getJobNameNums(List<DeliveryPostDO> jobNameList) {
         HashMap<String, Integer> hs = new HashMap<String, Integer>();
         for (int i = 0; i < jobNameList.size(); i++) {
-            DeliveryPost dp = jobNameList.get(i);
+            DeliveryPostDO dp = jobNameList.get(i);
             Integer count = 1;
             if (hs.get(dp.getJobName()) != null) {
                 count = hs.get(dp.getJobName()) + 1;
@@ -49,34 +44,34 @@ public class AiRecommendation {
         return hs;
     }
 
-    public List<AiResult<Job>> countAiNums(HashMap<String, Integer> hm, List<Job> jobList, Resume resumeInfo) {
-        List<AiResult<Job>> aiResultList = new ArrayList<AiResult<Job>>();
-        for (Job job : jobList) {
+    public List<AiResultDO<JobDO>> countAiNums(HashMap<String, Integer> hm, List<JobDO> jobDOList, ResumeDO resumeDOInfo) {
+        List<AiResultDO<JobDO>> aiResultDOList = new ArrayList<AiResultDO<JobDO>>();
+        for (JobDO jobDO : jobDOList) {
             Integer aiNums = 0;
-            AiResult<Job> ai = new AiResult<Job>();
+            AiResultDO<JobDO> ai = new AiResultDO<JobDO>();
 
-            if (hm.get(job.getJobName()) != null) {//投递次数
-                aiNums = 30 * hm.get(job.getJobName());
+            if (hm.get(jobDO.getJobName()) != null) {//投递次数
+                aiNums = 30 * hm.get(jobDO.getJobName());
             }
-            if (job.getUniversity().equals(resumeInfo.getUniversity())) {//一样大学
+            if (jobDO.getUniversity().equals(resumeDOInfo.getUniversity())) {//一样大学
                 aiNums += 30;
             }
-            if (Integer.parseInt(job.getEduBackground()) >= Integer.parseInt(resumeInfo.getEduBackground())) {//学历匹配
+            if (Integer.parseInt(jobDO.getEduBackground()) >= Integer.parseInt(resumeDOInfo.getEduBackground())) {//学历匹配
                 aiNums += 20;
             }
-            if (job.getSpecialty().equals(resumeInfo.getSpecialty())) {//专业相同
+            if (jobDO.getSpecialty().equals(resumeDOInfo.getSpecialty())) {//专业相同
                 aiNums += 20;
             }
             ai.setAiNums(aiNums);
-            ai.setData(job);
-            aiResultList.add(ai);
+            ai.setData(jobDO);
+            aiResultDOList.add(ai);
         }
 
-        Collections.sort(aiResultList, new Comparator<AiResult>() {
-            public int compare(AiResult arg0, AiResult arg1) {
+        Collections.sort(aiResultDOList, new Comparator<AiResultDO>() {
+            public int compare(AiResultDO arg0, AiResultDO arg1) {
                 return arg1.getAiNums().compareTo(arg0.getAiNums());
             }
         });
-        return aiResultList;
+        return aiResultDOList;
     }
 }

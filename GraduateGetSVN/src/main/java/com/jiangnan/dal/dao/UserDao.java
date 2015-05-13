@@ -1,7 +1,7 @@
 package com.jiangnan.dal.dao;
 
-import com.jiangnan.dal.dataobject.Resume;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.ResumeDO;
+import com.jiangnan.dal.dataobject.UserDO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,21 +11,21 @@ import java.util.List;
  */
 @Component
 public interface UserDao {
-    public List<User> getAllUser();
+    public List<UserDO> getAllUser();
 
-    public User getUser(String userId, String password);
+    public UserDO getUser(String userId, String password);
 
-    public User getUserById(Integer id);
+    public UserDO getUserById(Integer id);
 
-    public User getUserByUserId(String userId);
+    public UserDO getUserByUserId(String userId);
 
     public Integer addUser(String userId, String password, String email);
 
-    public Integer savePersonInfo(User user);
+    public Integer savePersonInfo(UserDO userDO);
 
-    public Integer editResume(Resume resume);
+    public Integer editResume(ResumeDO resumeDO);
 
-    public Resume getUserResumeByUserId(String userId);
+    public ResumeDO getUserResumeByUserId(String userId);
 
 
 }

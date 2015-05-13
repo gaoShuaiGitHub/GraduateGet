@@ -2,7 +2,7 @@ package com.jiangnan.web.home.module.screen;
 
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.dataresolver.Param;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.UserDO;
 
 /**
  * Created by gaoshuai.gs on 2015/4/7.
@@ -14,12 +14,12 @@ public class Register {
                         @Param("email") String email,
                         Context context
                         ){
-        User user=new User();
-        user.setUserId(userId);
-        user.setPassword(password);
-        user.setEmail(email);
+        UserDO userDO =new UserDO();
+        userDO.setUserId(userId);
+        userDO.setPassword(password);
+        userDO.setEmail(email);
 
-        context.put("user",user);
+        context.put("user", userDO);
         context.put("rePassword", rePassword);
     }
 }

@@ -7,7 +7,7 @@
 
 <sqlMap namespace="Resume">
     <!-- Use type aliases to avoid typing the full classname every time. -->
-    <typeAlias alias="Resume" type="com.jiangnan.dal.dataobject.Resume"/>
+    <typeAlias alias="Resume" type="com.jiangnan.dal.dataobject.ResumeDO"/>
 
     <!--将job表映射到Job类-->
     <resultMap id="resumeResult" class="Resume">

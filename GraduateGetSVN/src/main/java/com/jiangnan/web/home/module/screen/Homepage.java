@@ -4,11 +4,9 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.job.home.JobManager;
 import com.jiangnan.biz.user.UserManager;
-import com.jiangnan.dal.dataobject.Job;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.UserDO;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
-import com.jiangnan.web.job.module.control.JobList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +43,10 @@ public class Homepage {
         if (sessionUser == null) {
             context.put("result", "failed");
         } else {
-            User user = userManager.getUserByUserId(sessionUser.getUserId());
+            UserDO userDO = userManager.getUserByUserId(sessionUser.getUserId());
             context.put("result", "success");
-            context.put("user", user);
-            log.info("homepage test user=" + user);
+            context.put("user", userDO);
+            log.info("homepage test user=" + userDO);
         }
         List jobs;
         int sumResult;  //查询出来的总条数

@@ -1,6 +1,5 @@
 package com.jiangnan.web.user.module.action;
 
-import com.alibaba.citrus.service.form.CustomErrors;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.Navigator;
@@ -8,7 +7,7 @@ import com.alibaba.citrus.turbine.dataresolver.FormField;
 import com.alibaba.citrus.turbine.dataresolver.FormGroup;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.user.UserManager;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.UserDO;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,8 @@ public class LoginAction {
                         ParameterParser params,
                         Context context
     ) throws Exception {
-        User user = userManager.login(userId, password);
-        if (user != null) {
+        UserDO userDO = userManager.login(userId, password);
+        if (userDO != null) {
             //在session中创建SessionUser对象
             SessionUser sessionUser = (SessionUser) session.getAttribute(WebConstant.SESSION_USER_SESSION_KEY);
             if (sessionUser == null || sessionUser.hasLoggedIn()) {

@@ -3,7 +3,7 @@ package com.jiangnan.web.user.module.action;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.user.UserManager;
-import com.jiangnan.dal.dataobject.Resume;
+import com.jiangnan.dal.dataobject.ResumeDO;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,27 +40,27 @@ public class EditResumeAction {
 //            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
 //            sdf.parse(birthday);
 
-            Resume resume = new Resume();
-            resume.setUserId(userId);
-            resume.setName(name);
-            resume.setPhone(phone);
-            resume.setEmail(email);
-            resume.setBirthday(birthday);
-            resume.setCity(city);
-            resume.setMinMoney(minMoney);
-            resume.setMaxMoney(maxMoney);
-            resume.setExperience(experience);
-            resume.setEduBackground(eduBackground);
-            resume.setUniversity(university);
-            resume.setSpecialty(specialty);
+            ResumeDO resumeDO = new ResumeDO();
+            resumeDO.setUserId(userId);
+            resumeDO.setName(name);
+            resumeDO.setPhone(phone);
+            resumeDO.setEmail(email);
+            resumeDO.setBirthday(birthday);
+            resumeDO.setCity(city);
+            resumeDO.setMinMoney(minMoney);
+            resumeDO.setMaxMoney(maxMoney);
+            resumeDO.setExperience(experience);
+            resumeDO.setEduBackground(eduBackground);
+            resumeDO.setUniversity(university);
+            resumeDO.setSpecialty(specialty);
 
-            Integer flag = userManager.editResume(resume);
+            Integer flag = userManager.editResume(resumeDO);
             if (flag > 0) {
                 context.put("result", "success");
             } else {
                 context.put("result", "failed");
             }
-            context.put("resume", resume);
+            context.put("resume", resumeDO);
         }
     }
 

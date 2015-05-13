@@ -1,11 +1,7 @@
 package com.jiangnan.web.job.module.control;
 
-import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.citrus.turbine.Context;
-import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.job.home.JobManager;
-import com.jiangnan.dal.dao.ibatis.IbatisJobDao;
-import com.jiangnan.dal.dataobject.Job;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

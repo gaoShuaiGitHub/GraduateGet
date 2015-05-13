@@ -1,15 +1,10 @@
 package com.jiangnan.web.job.module.action;
 
-import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.Navigator;
-import com.alibaba.citrus.turbine.dataresolver.FormField;
-import com.alibaba.citrus.turbine.dataresolver.FormGroup;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.job.home.JobManager;
-import com.jiangnan.dal.dataobject.DeliveryPost;
-import com.jiangnan.dal.dataobject.Job;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.DeliveryPostDO;
 import com.jiangnan.web.common.WebConstant;
 import com.jiangnan.web.common.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +33,9 @@ public class SendResumeAction {
             navigator.redirectTo(WebConstant.LOGIN_RETURN_DEFAULT_LINK);
             return ;
         }
-        DeliveryPost deliveryPost =jobManager.getCheckSendInfoByJobIdAndUserId(id,sessionUser.getUserId());
-        System.out.println("deliveryPost="+deliveryPost);
-        if(deliveryPost!=null){
+        DeliveryPostDO deliveryPostDO =jobManager.getCheckSendInfoByJobIdAndUserId(id,sessionUser.getUserId());
+        System.out.println("deliveryPost="+ deliveryPostDO);
+        if(deliveryPostDO !=null){
             context.put("result","failed");
             context.put("errorMessage","你已经投递过该职位啦，相同职位职能投递一次，赶快去看看其他职位吧。");
             return ;

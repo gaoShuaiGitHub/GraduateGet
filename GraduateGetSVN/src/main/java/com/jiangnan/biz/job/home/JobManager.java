@@ -1,7 +1,9 @@
 package com.jiangnan.biz.job.home;
 
-import com.jiangnan.dal.dataobject.DeliveryPost;
-import com.jiangnan.dal.dataobject.Job;
+import com.jiangnan.dal.dataobject.AiResultDO;
+import com.jiangnan.dal.dataobject.DeliveryPostDO;
+import com.jiangnan.dal.dataobject.JobDO;
+import com.jiangnan.dal.dataobject.ResumeDO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public interface JobManager {
     public List getJobList();
     public List getJobListWithPageSize(Integer stratRow);
 
-    public Job getJobInfoById(Integer id);
+    public JobDO getJobInfoById(Integer id);
 
     public List getJobListByUserId(String userId,Integer flag);
 
@@ -27,13 +29,15 @@ public interface JobManager {
 
     public List queryJobsBySearchText(String searchText,Integer startRow);
 
-    public Integer postJob(Job job);
+    public Integer postJob(JobDO jobDO);
 
     public List getDeliveryNumsCountJobName(String userId);
 
     public List getMaxUniversity();
 
     public List getMaxJobName();
-    public DeliveryPost getCheckSendInfoByJobIdAndUserId(int jobId,String userId);
 
+    public DeliveryPostDO getCheckSendInfoByJobIdAndUserId(int jobId,String userId);
+
+    public List<AiResultDO<JobDO>> calculationMatching(ResumeDO resumeDO);
 }

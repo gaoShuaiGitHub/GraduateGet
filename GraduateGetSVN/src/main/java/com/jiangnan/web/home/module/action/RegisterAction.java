@@ -3,7 +3,7 @@ package com.jiangnan.web.home.module.action;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.jiangnan.biz.user.UserManager;
-import com.jiangnan.dal.dataobject.User;
+import com.jiangnan.dal.dataobject.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.regex.Matcher;
@@ -36,8 +36,8 @@ public class RegisterAction {
             return;
         }
 
-        User user = userManager.getUserByUserId(userId);
-        if (user != null) {
+        UserDO userDO = userManager.getUserByUserId(userId);
+        if (userDO != null) {
             context.put("errorMessage", "该账号已存在，请换一个账号名注册哦！");
             context.put("result", "failed");
         } else {
