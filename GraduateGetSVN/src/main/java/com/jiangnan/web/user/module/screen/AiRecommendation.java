@@ -24,54 +24,10 @@ public class AiRecommendation {
 
     public void execute(HttpSession session,
                         Context context) {
-        List jobs = new ArrayList();
         SessionUser sessionUser = (SessionUser) session.getAttribute(WebConstant.SESSION_USER_SESSION_KEY);
         ResumeDO resumeDOInfo = userManager.getUserResumeByUserId(sessionUser.getUserId());
-        List<AiResultDO<JobDO>> aiResultDOLists = jobManager.calculationMatching(resumeDOInfo);
+        UserDO userDO=userManager.getUserByUserId(sessionUser.getUserId());
+        List<AiResultDO<JobDO>> aiResultDOLists = jobManager.calculationMatching(resumeDOInfo).subList(0, userDO.getAiNums());
         context.put("aiResultLists", aiResultDOLists);
-    }
-
-    public HashMap<String, Integer> getJobNameNums(List<DeliveryPostDO> jobNameList) {
-        HashMap<String, Integer> hs = new HashMap<String, Integer>();
-        for (int i = 0; i < jobNameList.size(); i++) {
-            DeliveryPostDO dp = jobNameList.get(i);
-            Integer count = 1;
-            if (hs.get(dp.getJobName()) != null) {
-                count = hs.get(dp.getJobName()) + 1;
-            }
-            hs.put(dp.getJobName(), count / jobNameList.size());
-        }
-        return hs;
-    }
-
-    public List<AiResultDO<JobDO>> countAiNums(HashMap<String, Integer> hm, List<JobDO> jobDOList, ResumeDO resumeDOInfo) {
-        List<AiResultDO<JobDO>> aiResultDOList = new ArrayList<AiResultDO<JobDO>>();
-        for (JobDO jobDO : jobDOList) {
-            Integer aiNums = 0;
-            AiResultDO<JobDO> ai = new AiResultDO<JobDO>();
-
-            if (hm.get(jobDO.getJobName()) != null) {//投递次数
-                aiNums = 30 * hm.get(jobDO.getJobName());
-            }
-            if (jobDO.getUniversity().equals(resumeDOInfo.getUniversity())) {//一样大学
-                aiNums += 30;
-            }
-            if (Integer.parseInt(jobDO.getEduBackground()) >= Integer.parseInt(resumeDOInfo.getEduBackground())) {//学历匹配
-                aiNums += 20;
-            }
-            if (jobDO.getSpecialty().equals(resumeDOInfo.getSpecialty())) {//专业相同
-                aiNums += 20;
-            }
-            ai.setAiNums(aiNums);
-            ai.setData(jobDO);
-            aiResultDOList.add(ai);
-        }
-
-        Collections.sort(aiResultDOList, new Comparator<AiResultDO>() {
-            public int compare(AiResultDO arg0, AiResultDO arg1) {
-                return arg1.getAiNums().compareTo(arg0.getAiNums());
-            }
-        });
-        return aiResultDOList;
     }
 }

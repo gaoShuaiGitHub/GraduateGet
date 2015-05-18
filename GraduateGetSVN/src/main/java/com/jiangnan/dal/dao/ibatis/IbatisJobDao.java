@@ -23,9 +23,8 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
     private UserManager userManager;
 
     @Override
-    public List getJobList() {
-
-        return getSqlMapClientTemplate().queryForList("selectJobList", null);
+    public List<JobDO> getJobList() {
+        return (List<JobDO>)getSqlMapClientTemplate().queryForList("selectJobList", null);
     }
 
     @Override
@@ -111,11 +110,11 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
     }
 
     @Override
-    public List<JobDO> getDeliveryNumsCountJobName(String userId) {
+    public List<DeliveryPostDO> getDeliveryNumsCountJobName(String userId) {
         DeliveryPostDO deliveryPostDO =new DeliveryPostDO();
         deliveryPostDO.setUserId(userId);
         deliveryPostDO.setFlag(1);
-        return (List<JobDO>) getSqlMapClientTemplate().queryForList("deliveryNumsCountJobName", deliveryPostDO);
+        return (List<DeliveryPostDO>) getSqlMapClientTemplate().queryForList("deliveryNumsCountJobName", deliveryPostDO);
     }
 
     @Override
@@ -136,7 +135,7 @@ public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
     }
 
     @Override
-    public List getProbabilityList() {
-        return  getSqlMapClientTemplate().queryForList("probabilityList.getProbabilityList");
+    public List<ProbabilityListDO> getProbabilityList() {
+        return (List<ProbabilityListDO>) getSqlMapClientTemplate().queryForList("probabilityList.getProbabilityList");
     }
 }

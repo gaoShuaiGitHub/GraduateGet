@@ -8,6 +8,7 @@ import com.jiangnan.web.common.WebConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -20,7 +21,7 @@ public class JobManagerImpl implements JobManager {
     private JobDao jobDao;
 
     @Override
-    public List getJobList() {
+    public List<JobDO> getJobList() {
         return jobDao.getJobList();
     }
 
@@ -66,7 +67,7 @@ public class JobManagerImpl implements JobManager {
     }
 
     @Override
-    public List<JobDO> getDeliveryNumsCountJobName(String userId) {
+    public List<DeliveryPostDO> getDeliveryNumsCountJobName(String userId) {
         return jobDao.getDeliveryNumsCountJobName(userId);
     }
 
@@ -87,16 +88,26 @@ public class JobManagerImpl implements JobManager {
 
     @Override
     public List<AiResultDO<JobDO>> calculationMatching(ResumeDO resumeDO) {
-
+        List<AiResultDO<JobDO>> aiResultDOList = new ArrayList<AiResultDO<JobDO>>();
         List<JobDO> jobDOList = getJobList();
+        DecimalFormat df = new DecimalFormat("######0.00");
         for (JobDO jobDO : jobDOList) {
-            MatchingPointDO matchingPointDO = new MatchingPointDO();
-            matchingPointDO = getMatchingPointDO(jobDO, resumeDO);
-
+            System.out.println("jobDo:" + jobDO);
+            Double recommendPoint = calculationRecommendPoint(jobDO, resumeDO);
+            AiResultDO<JobDO> aiResultDO = new AiResultDO<JobDO>();
+            aiResultDO.setData(jobDO);
+            aiResultDO.setAiNums(df.format(recommendPoint));
+            aiResultDOList.add(aiResultDO);
         }
+        Collections.sort(aiResultDOList, new Comparator<AiResultDO>() {
+            public int compare(AiResultDO arg0, AiResultDO arg1) {
+                return arg1.getAiNums().compareTo(arg0.getAiNums());
+            }
+        });
+        return aiResultDOList;
     }
 
-    public List getProbabilityList() {
+    public List<ProbabilityListDO> getProbabilityList() {
         return jobDao.getProbabilityList();
     }
 
@@ -105,6 +116,7 @@ public class JobManagerImpl implements JobManager {
         Map<String, Double> matchingPointMap = new HashMap<String, Double>();
         MatchingPointDO matchingPointDO = new MatchingPointDO();
         if (jobDO == null || resumeDO == null) {
+            System.out.println("jobDO or resumeDO is null");
             return null;
         }
 
@@ -118,8 +130,8 @@ public class JobManagerImpl implements JobManager {
         matchingPointMap.put("postTime", MatchingPointUtil.getPostTimeUtil().get(calculationDate(jobDO.getTime())));
         matchingPointMap.put("moneyPoint", getMoneyPoint(resumeDO.getMinMoney(), resumeDO.getMaxMoney(), jobDO.getMinMoney(), jobDO.getMaxMoney()));
 
-        matchingPointDO.setUnitersityPoint(matchingPointMap.get("university"));
-        matchingPointDO.setAdderssPoint(matchingPointMap.get("address"));
+        matchingPointDO.setUniversityPoint(matchingPointMap.get("university"));
+        matchingPointDO.setAddressPoint(matchingPointMap.get("address"));
         matchingPointDO.setCompanySizePoint(matchingPointMap.get("companySize"));
         matchingPointDO.setDeliveryThreePoint(matchingPointMap.get("deliveryThree"));
         matchingPointDO.setPostTimePoint(matchingPointMap.get("postTime"));
@@ -129,8 +141,9 @@ public class JobManagerImpl implements JobManager {
 
     public Integer getRankings(String jobName, String userId) {
         Integer ranking = null;
-        List<JobDO> jobDeliveryThreeList = getDeliveryNumsCountJobName(userId);
+        List<DeliveryPostDO> jobDeliveryThreeList = getDeliveryNumsCountJobName(userId);
         if (jobDeliveryThreeList == null) {
+            System.out.println("jobDeliveryThreeList is null");
             return null;
         }
         for (int i = 0; i < jobDeliveryThreeList.size(); i++) {
@@ -144,7 +157,7 @@ public class JobManagerImpl implements JobManager {
     }
 
     public String calculationDate(Date date) {
-        String resultString = null;
+        String resultString;
         Calendar calendar = Calendar.getInstance();
         Integer day = calendar.get(Calendar.DATE) - date.getDate();
         if (day >= 0 && day <= 3) {
@@ -156,7 +169,7 @@ public class JobManagerImpl implements JobManager {
         } else if (day > 14 && day <= 30) {
             resultString = "lessOneMonth";
         } else {
-            resultString = "MoreOneMonth";
+            resultString = "moreOneMonth";
         }
         return resultString;
     }
@@ -174,7 +187,38 @@ public class JobManagerImpl implements JobManager {
     }
 
 
-    public Double calculationRecommendPoint(){
-        List probabilityList = getProbabilityList();
+    public Double calculationRecommendPoint(JobDO jobDO, ResumeDO resumeDO) {
+        List<ProbabilityListDO> probabilityList = getProbabilityList();
+        MatchingPointDO matchingPointDO = getMatchingPointDO(jobDO, resumeDO);
+        if (probabilityList == null) {
+            System.out.println("probabilityList is null");
+            return null;
+        }
+
+        ProbabilityListDO mostAttention = probabilityList.get(0);//最关注的属性分值
+        ProbabilityListDO mostAttentionOrder = probabilityList.get(1);//最关注的属性顺序分值
+
+        if (matchingPointDO == null) {
+            System.out.println("matchingPointDO is null");
+            return null;
+        }
+        System.out.println("matchingPointDO:" + matchingPointDO);
+        Double pointOfMostAttention = mostAttention.getUniversity() * matchingPointDO.getUniversityPoint()
+                + mostAttention.getAddress() * matchingPointDO.getAddressPoint()
+                + mostAttention.getMoney() * matchingPointDO.getMoneyPoint()
+                + mostAttention.getEduBackground()
+                + mostAttention.getCompanySize() * matchingPointDO.getCompanySizePoint()
+                + mostAttention.getDeliveryThree() * matchingPointDO.getDeliveryThreePoint();
+
+        Double pointOfMostAttentionOrder = mostAttentionOrder.getUniversity() * matchingPointDO.getUniversityPoint()
+                + mostAttentionOrder.getAddress() * matchingPointDO.getAddressPoint()
+                + mostAttentionOrder.getMoney() * matchingPointDO.getMoneyPoint()
+                + mostAttentionOrder.getEduBackground()
+                + mostAttentionOrder.getSpecialty()
+                + mostAttentionOrder.getCompanySize() * matchingPointDO.getCompanySizePoint()
+                + mostAttentionOrder.getPostTime() * matchingPointDO.getPostTimePoint()
+                + mostAttentionOrder.getDeliveryThree() * matchingPointDO.getDeliveryThreePoint();
+
+        return (pointOfMostAttention + pointOfMostAttentionOrder) / 2;
     }
 }

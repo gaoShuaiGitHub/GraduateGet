@@ -13,6 +13,4 @@ public class HomeManagerImpl implements HomeManager {
 
     @Autowired
     private IbatisJobDao ibatisJobDao;
-
-
 }
