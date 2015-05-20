@@ -5,10 +5,12 @@
     <title>发布内推</title>
     <!-- Bootstrap core CSS -->
     <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../dist/css/bootstrap-select.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="$userContent.getURI("css/postJob.css")" rel="stylesheet" type="text/css">
     <script src="../../../js/jquery-2.1.3.min.js"></script>
     <script src="../../../dist/js/bootstrap.min.js"></script>
+    <script src="../../../dist/js/bootstrap-select.js"></script>
 </head>
 <body>
 <div class="heading" style="
@@ -70,11 +72,11 @@
 ">公司规模：</label>
 
                                 <div class="col-sm-5">
-                                    <select id="companySize" name="companySize">
-                                        <option selected value="1To50">1——50人</option>
-                                        <option value="50To100">50——100人</option>
-                                        <option value="100To500">100——500人</option>
-                                        <option value="500ToXXX">500人以上</option>
+                                    <select id="companySize" name="companySize" class="selectpickerCompanySize" style="width: 100%">
+                                        <option selected value="1To50">___________1——50人___________</option>
+                                        <option value="50To100">__________50——100人__________</option>
+                                        <option value="100To500">_________100——500人__________</option>
+                                        <option value="500ToXXX">___________500人以上___________</option>
                                     </select>
                                 </div>
                             </div>
@@ -115,12 +117,12 @@
 ">学历：</label>
 
                                 <div class="col-sm-5">
-                                    <select id="eduBackground" name="eduBackground">
-                                        <option selected value="1">专科</option>
-                                        <option value="2">本科</option>
-                                        <option value="3">硕士</option>
-                                        <option value="4">博士</option>
-                                        <option value="0">其他</option>
+                                    <select id="eduBackground" name="eduBackground" class="selectpickerEdu">
+                                        <option selected value="1">----------------专科-----------------</option>
+                                        <option value="2">----------------本科-----------------</option>
+                                        <option value="3">----------------硕士-----------------</option>
+                                        <option value="4">----------------博士-----------------</option>
+                                        <option value="0">----------------其他-----------------</option>
                                     </select>
                                 </div>
                             </div>
@@ -246,6 +248,17 @@
             return false;
         }
     }
+    $('.selectpickerCompanySize').selectpicker();
+    $('.selectpickerCompanySize').selectpicker({
+        style: 'btn-info',
+        size: 4
+    });
+
+    $('.selectpickerEdu').selectpicker();
+    $('.selectpickerEdu').selectpicker({
+        style: 'btn-info',
+        size: 4
+    });
 </script>
 </body>
 </html>

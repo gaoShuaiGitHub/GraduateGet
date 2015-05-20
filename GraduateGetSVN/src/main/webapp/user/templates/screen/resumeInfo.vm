@@ -64,15 +64,9 @@
                             <div class="form-group">
                                 <label class="control-label" style="
     text-align: center;
-">薪资：</label>$!resume.minMoney~$!resume.maxMoney
+">期望薪资：</label>$!resume.minMoney~$!resume.maxMoney
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" style="
-    text-align: left;
-">经历：
 
-                                </label><pre>$!resume.experience</pre>
-                            </div>
 
                             <div class="form-group">
                                 <label class="control-label" style="
@@ -96,6 +90,13 @@
     text-align: center;
 ">学校：</label>$!resume.university
                                 <label class="control-label" style="text-align: center;">专业：</label>$!resume.specialty
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="
+    text-align: left;
+">经历：
+
+                                </label><pre>$!resume.experience</pre>
                             </div>
                     </div>
                     </form>

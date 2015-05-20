@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="ProbabilityListDO">
+    <!-- Use type aliases to avoid typing the full classname every time. -->
+    <typeAlias alias="probabilityListDO" type="com.jiangnan.dal.dataobject.ProbabilityListDO"/>
+
+    <!--将job表映射到Job类-->
+    <resultMap id="probabilityListDOResult" class="ProbabilityListDO">
+
+        <result property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="university" column="university"/>
+        <result property="address" column="address"/>
+        <result property="money" column="money"/>
+        <result property="eduBackground" column="edu_background"/>
+        <result property="specialty" column="specialty"/>
+        <result property="companySize" column="company_size"/>
+        <result property="postTime" column="post_time"/>
+        <result property="deliveryThree" column="delivery_three"/>
+    </resultMap>
+
+    <!-- Select with no parameters using the result map for Account class. -->
+
+    <select id="probabilityList.getProbabilityList" resultClass="probabilityListDO" resultMap="probabilityListDOResult" parameterClass="ProbabilityListDO">
+        select * from probability_list
+    </select>
+
+</sqlMap>
