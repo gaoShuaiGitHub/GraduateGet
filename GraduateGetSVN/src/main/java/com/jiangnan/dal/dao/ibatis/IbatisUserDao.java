@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by GS-YL on 2015/2/25.
+ * 个人信息数据库信息操作实现类
  */
 @Component
 public class IbatisUserDao extends SqlMapClientDaoSupport implements UserDao {

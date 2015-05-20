@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Created by gaoshuai.gs on 2015/5/13.
+ * 匹配算法数据设定类
  */
 public class MatchingPointUtil {
 

@@ -2,6 +2,7 @@ package com.jiangnan.dal.dataobject;
 
 /**
  * Created by gaoshuai.gs on 2015/5/13.
+ * 匹配权重对象
  */
 public class MatchingPointDO {
     private Double universityPoint;

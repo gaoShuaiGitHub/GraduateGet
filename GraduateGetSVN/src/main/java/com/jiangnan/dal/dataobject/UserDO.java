@@ -2,6 +2,7 @@ package com.jiangnan.dal.dataobject;
 
 /**
  * Created by GS-YL on 2015/2/23.
+ * 用户个人信息对象
  */
 public class UserDO {
     private Integer id;

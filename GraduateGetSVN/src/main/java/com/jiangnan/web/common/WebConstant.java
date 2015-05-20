@@ -2,7 +2,7 @@ package com.jiangnan.web.common;
 
 /**
  * Created by GS-YL on 2015/2/26.
- * Web层常量
+ * Web层常量类
  */
 
 public interface WebConstant {

@@ -2,6 +2,7 @@ package com.jiangnan.dal.dataobject;
 
 /**
  * Created by gaoshuai.gs on 2015/3/22.
+ * 搜索查询对象
  */
 public class SearchDO {
     private String searchText;

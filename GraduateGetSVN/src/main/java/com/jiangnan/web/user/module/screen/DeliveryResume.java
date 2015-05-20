@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by gaoshuai.gs on 2015/3/31.
+ * 投递简历页面渲染类
  */
 public class DeliveryResume {
 

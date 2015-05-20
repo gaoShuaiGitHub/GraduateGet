@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by GS-YL on 2015/3/2.
+ * 工作信息渲染类
  */
 public class JobInfo {
     @Autowired

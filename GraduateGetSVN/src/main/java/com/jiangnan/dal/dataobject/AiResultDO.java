@@ -2,6 +2,7 @@ package com.jiangnan.dal.dataobject;
 
 /**
  * Created by gaoshuai.gs on 2015/4/2.
+ * 智能推荐返回对象
  */
 public class AiResultDO<T> {
 

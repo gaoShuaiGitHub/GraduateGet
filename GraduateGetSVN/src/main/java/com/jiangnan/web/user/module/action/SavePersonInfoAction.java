@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by gaoshuai.gs on 2015/3/15.
+ * 保存个人信息action类
  */
 public class SavePersonInfoAction {
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by GS-YL on 2015/2/23.
+ * 个人信息数据库信息操作接口类
  */
 @Component
 public interface UserDao {

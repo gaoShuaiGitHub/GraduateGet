@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by GS-YL on 2015/3/2.
+ * 首页渲染类
  */
 public class Homepage {
 

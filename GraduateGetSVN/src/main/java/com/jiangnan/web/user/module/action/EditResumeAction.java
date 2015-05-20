@@ -12,6 +12,7 @@ import java.text.ParseException;
 
 /**
  * Created by gaoshuai.gs on 2015/3/30.
+ * 用户编辑简历action类
  */
 public class EditResumeAction {
 

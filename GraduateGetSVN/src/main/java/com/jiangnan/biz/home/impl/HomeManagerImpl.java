@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by GS-YL on 2015/2/27.
+ * 首页实现类
  */
 @Component
 public class HomeManagerImpl implements HomeManager {

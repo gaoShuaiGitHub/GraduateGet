@@ -13,6 +13,7 @@ import java.util.*;
 
 /**
  * Created by GS-YL on 2015/2/27.
+ * 职位信息处理接口实现
  */
 @Component
 public class JobManagerImpl implements JobManager {

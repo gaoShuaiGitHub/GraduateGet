@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by GS-YL on 2015/2/25.
+ * 个人信息处理接口
  */
 @Component
 public interface UserManager {

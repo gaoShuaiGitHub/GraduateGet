@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by gaoshuai.gs on 2015/3/31.
+ * 查看投递人简历信息页面渲染类
  */
 public class ResumeInfo {
 

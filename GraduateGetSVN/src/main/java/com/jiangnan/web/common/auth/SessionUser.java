@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by gaoshuai.gs on 2015/3/16.
+ * 登录信息session类
  */
 public class SessionUser implements Serializable {
 

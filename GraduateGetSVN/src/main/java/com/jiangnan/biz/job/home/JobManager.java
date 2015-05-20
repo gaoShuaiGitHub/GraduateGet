@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by GS-YL on 2015/2/27.
+ * 职位信息处理接口
  */
 @Component
 public interface JobManager {

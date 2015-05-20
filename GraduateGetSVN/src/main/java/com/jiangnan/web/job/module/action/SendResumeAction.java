@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by GS-YL on 2015/3/15.
+ * 发送简历action类
  */
 public class SendResumeAction {
 

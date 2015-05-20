@@ -2,6 +2,7 @@ package com.jiangnan.dal.dataobject;
 
 /**
  * Created by gaoshuai.gs on 2015/5/13.
+ *权重列表对象
  */
 public class ProbabilityListDO {
 

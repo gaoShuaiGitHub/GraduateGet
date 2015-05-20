@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by GS-YL on 2015/2/27.
+ * 首页接受注册action类
  */
 public class RegisterAction {
 

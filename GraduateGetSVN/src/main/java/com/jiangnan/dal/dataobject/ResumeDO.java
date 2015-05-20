@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Created by gaoshuai.gs on 2015/3/30.
+ * 个人简历对象
  */
 public class ResumeDO {
     private String userId;

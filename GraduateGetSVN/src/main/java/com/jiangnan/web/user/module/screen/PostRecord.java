@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by gaoshuai.gs on 2015/3/30.
+ * 发布职位记录页面渲染类
  */
 public class PostRecord {
 

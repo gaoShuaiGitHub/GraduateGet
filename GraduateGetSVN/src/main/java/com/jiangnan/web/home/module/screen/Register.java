@@ -6,6 +6,7 @@ import com.jiangnan.dal.dataobject.UserDO;
 
 /**
  * Created by gaoshuai.gs on 2015/4/7.
+ * 注册页面渲染类
  */
 public class Register {
     public void execute(@Param("userId") String userId,

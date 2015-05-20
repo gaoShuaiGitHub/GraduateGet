@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by gaoshuai.gs on 2015/3/15.
+ * 个人信息页面渲染类
  */
 public class PersonalInfo {
     @Autowired

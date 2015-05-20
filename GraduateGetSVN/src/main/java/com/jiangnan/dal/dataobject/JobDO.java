@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Created by GS-YL on 2015/2/27.
+ * 职位信息对象
  */
 public class JobDO {
     private Integer id;

@@ -13,6 +13,7 @@ import java.util.*;
 
 /**
  * Created by gaoshuai.gs on 2015/4/2.
+ * 智能推荐页面渲染类
  */
 public class AiRecommendation {
 

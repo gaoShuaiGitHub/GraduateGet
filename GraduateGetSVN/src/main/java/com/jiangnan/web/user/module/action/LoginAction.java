@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by GS-YL on 2015/2/25.
+ * 用户登录action类
  */
 @Service
 public class LoginAction {

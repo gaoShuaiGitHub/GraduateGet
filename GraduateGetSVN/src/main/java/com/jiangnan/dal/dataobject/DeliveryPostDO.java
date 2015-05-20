@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Created by GS-YL on 2015/3/15.
+ * 职位投递记录对象
  */
 public class DeliveryPostDO {
 

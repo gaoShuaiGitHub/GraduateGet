@@ -73,10 +73,10 @@
 
                                 <div class="col-sm-5">
                                     <select id="companySize" name="companySize" class="selectpickerCompanySize" style="width: 100%">
-                                        <option selected value="1To50">___________1——50人___________</option>
-                                        <option value="50To100">__________50——100人__________</option>
-                                        <option value="100To500">_________100——500人__________</option>
-                                        <option value="500ToXXX">___________500人以上___________</option>
+                                        <option selected value="1To50">_______1——50人_________</option>
+                                        <option value="50To100">_______50——100人_________</option>
+                                        <option value="100To500">_______100——500人_________</option>
+                                        <option value="500ToXXX">_______500人以上_________</option>
                                     </select>
                                 </div>
                             </div>

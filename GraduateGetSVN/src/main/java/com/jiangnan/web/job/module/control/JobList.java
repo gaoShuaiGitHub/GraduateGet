@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by GS-YL on 2015/2/27.
+ * 获取jobList的control类
  */
 public class JobList {
     private final static Logger log = LoggerFactory.getLogger(JobList.class);

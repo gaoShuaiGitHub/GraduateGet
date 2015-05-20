@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * Created by GS-YL on 2015/2/25.
+ * 职位信息数据库信息操作实现类
  */
 @Component
 public class IbatisJobDao extends SqlMapClientDaoSupport implements JobDao {
