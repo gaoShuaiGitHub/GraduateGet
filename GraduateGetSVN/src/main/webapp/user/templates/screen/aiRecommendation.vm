@@ -48,15 +48,23 @@
                                 <ul class="list-group">
                                     #foreach ($aiResultList in $aiResultLists)
                                         <li class="list-group-item">
-                                            <a href="$jobInfoLink.addQueryData("id", $!aiResultList.data.id)  "
-                                               title="$!aiResultList.data.jobName">$!aiResultList.data.jobName</a>
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <a href="$jobInfoLink.addQueryData("id", $!aiResultList.data.id)  "
+                                                       title="$!aiResultList.data.jobName">$!aiResultList.data.jobName</a>
 
-                                            <div style="color: darkslategrey">公司：$!aiResultList.data.company</div>
-                                            <div style="color: coral">地址：$!aiResultList.data.address</div>
-                                            <div style="color: #6869ff">薪资：$!aiResultList.data.minMoney
-                                                ~ $!aiResultList.data.maxMoney</div>
-                                            <div style="color: #6869ff">学长所属学校：$!aiResultList.data.university</div>
-                                            <div style="color: #6869ff">推荐指数：$!aiResultList.aiNums%</div>
+                                                    <div style="color: darkslategrey">
+                                                        公司：$!aiResultList.data.company</div>
+                                                    <div style="color: coral">地址：$!aiResultList.data.address</div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div style="color: #6869ff">
+                                                        学长所属学校：$!aiResultList.data.university</div>
+                                                    <div style="color: #6869ff">薪资：$!aiResultList.data.minMoney
+                                                        ~ $!aiResultList.data.maxMoney</div>
+                                                    <div style="color: #6869ff">推荐指数：<font color="red">$!aiResultList.aiNums%</font></div>
+                                                </div>
+                                            </div>
                                         </li>
                                     #end
                                 </ul>

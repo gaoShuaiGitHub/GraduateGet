@@ -5,12 +5,10 @@
     <title>发布内推</title>
     <!-- Bootstrap core CSS -->
     <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../dist/css/bootstrap-select.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="$userContent.getURI("css/postJob.css")" rel="stylesheet" type="text/css">
     <script src="../../../js/jquery-2.1.3.min.js"></script>
     <script src="../../../dist/js/bootstrap.min.js"></script>
-    <script src="../../../dist/js/bootstrap-select.js"></script>
 </head>
 <body>
 <div class="heading" style="
@@ -53,17 +51,17 @@
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="jobName" name="jobName"
-                                           value="$!job.jobName">
+                                           value="$!job.jobName" placeholder="请填写正确的职位名称，不可留空哦。">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" style="
     text-align: center;
-">公司：</label>
+">公司名称：</label>
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="company" name="company"
-                                           value="$!job.company">
+                                           value="$!job.company" placeholder="填写真实的公司名称，不可留空哦。">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -72,11 +70,13 @@
 ">公司规模：</label>
 
                                 <div class="col-sm-5">
-                                    <select id="companySize" name="companySize" class="selectpickerCompanySize" style="width: 100%">
-                                        <option selected value="1To50">_______1——50人_________</option>
-                                        <option value="50To100">_______50——100人_________</option>
-                                        <option value="100To500">_______100——500人_________</option>
-                                        <option value="500ToXXX">_______500人以上_________</option>
+                                    <select id="companySize" name="companySize" style="
+                                    width: 100%; height:32px;border-radius: 4px;"
+                                            >
+                                        <option selected value="1To50">1—50人</option>
+                                        <option value="50To100">50—100人</option>
+                                        <option value="100To500">100—500人</option>
+                                        <option value="500ToXXX">500人以上</option>
                                     </select>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="address" name="address"
-                                           value="$!job.address">
+                                           value="$!job.address" placeholder="地址越详细越方便哦，不可留空哦。">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -98,7 +98,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="minMoney" name="minMoney"
-                                           value="$!job.minMoney">
+                                           value="$!job.minMoney"placeholder="务必填写职位的最低薪资哈。">
                                 </div>
                                 <div>
                                     <label class="col-sm-1 control-label" style="
@@ -108,7 +108,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" id="maxMoney" name="maxMoney"
-                                           value="$!job.maxMoney">
+                                           value="$!job.maxMoney"placeholder="最大薪资也写一下哈。">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -117,12 +117,13 @@
 ">学历：</label>
 
                                 <div class="col-sm-5">
-                                    <select id="eduBackground" name="eduBackground" class="selectpickerEdu">
-                                        <option selected value="1">----------------专科-----------------</option>
-                                        <option value="2">----------------本科-----------------</option>
-                                        <option value="3">----------------硕士-----------------</option>
-                                        <option value="4">----------------博士-----------------</option>
-                                        <option value="0">----------------其他-----------------</option>
+                                    <select id="eduBackground" name="eduBackground" style="
+                                    width: 100%; height:32px;border-radius: 4px;">
+                                        <option selected value="1">专科</option>
+                                        <option value="2">本科</option>
+                                        <option value="3">硕士</option>
+                                        <option value="4">博士</option>
+                                        <option value="0">其他</option>
                                     </select>
                                 </div>
                             </div>
@@ -133,7 +134,7 @@
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" id="specialty" name="specialty"
-                                           value="$!job.specialty" placeholder="请填写要求的完整专业名。">
+                                           value="$!job.specialty" placeholder="填写完整专业名匹配正准确哦。">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -144,7 +145,7 @@
                                 <div class="col-sm-12">
                                     <textarea id="jobReq" name="jobReq" class="form-control"
                                               style="height: 230px;width: 96%;margin-left: 26px;margin-top: 10px;"
-                                              placeholder="请填写职位要求"></textarea>
+                                              placeholder="填写详细的职位要求更容易受到简历哦"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -157,7 +158,7 @@
     width: 730px;
 ">
                                     <input type="text" class="form-control" id="reqSummary" name="reqSummary"
-                                           value="$!job.reqSummary" placeholder="职位摘要，用逗号分开，如：应届生，计算机">
+                                           value="$!job.reqSummary" placeholder="一些职位摘要，用逗号分开，比如：应届生，计算机等等">
                                 </div>
                             </div>
 
@@ -179,7 +180,7 @@
 <div class="footer" style="
     width: 100%;
     height: 70px;
-    background-color: rgb(42, 42, 79);
+
 ">
     $control.setTemplate("home:bootom.vm")
 </div>

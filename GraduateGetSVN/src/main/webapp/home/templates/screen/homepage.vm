@@ -18,17 +18,20 @@
     padding-bottom: 71px;
 ">
     <div class="navbar navbar-fixed-top" role="navigation" style="
-    background-color: rgb(42, 42, 79);
+    background-color: rgb(68, 69, 158);
 ">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="$homepageLink">毕业生内推网</a>
+                <a href="$homepageLink" style="color: aliceblue">
+                    <img src="../../../common/img/logo.jpg" style="height:50px"></img>
+                </a>
             </div>
             <div id="navbar1" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="$homepageLink">首页</a></li>
+                    <li class="active"><a href="$homepageLink" style="color: aliceblue">首页</a></li>
                     #if($result=="success")
-                        <li><a href="$userPersonalInfoLink.addQueryData("userId", $!user.userId)">个人信息</a></li>
+                        <li><a href="$userPersonalInfoLink.addQueryData("userId", $!user.userId)"
+                               style="color: aliceblue">个人信息</a></li>
                     #end
                 </ul>
             </div>
@@ -76,15 +79,21 @@
                         <div class="col-xs-10 col-lg-12">
                             #foreach ($job in $jobs)
                                 <li class="list-group-item">
-                                    <a href="$jobInfoLink.addQueryData("id", $!job.id)"
-                                       title="$!job.jobName">$!job.jobName</a>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <a href="$jobInfoLink.addQueryData("id", $!job.id)"
+                                               title="$!job.jobName">$!job.jobName</a>
 
-                                    <div style="color: darkslategrey">公司：$!job.company</div>
-                                    <div style="color: coral">地址：$!job.address</div>
-                                    <div style="color: #6869ff">薪资：$!job.minMoney  ~ $!job.maxMoney</div>
+                                            <div style="color: darkslategrey">公司：$!job.company</div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div style="color: coral">地址：$!job.address</div>
+                                            <div style="color: #6869ff">薪资：$!job.minMoney  ~ $!job.maxMoney</div>
+                                        </div>
+                                    </div>
                                 </li>
                             #end
-                            <nav class="center">
+                            <nav class="center" style="padding-top: 15px">
                                 <tr nowrap>
                                     <td width="100%" height="30" align="center" colspan="9" nowrap>
                                         <table border="0" cellspacing="6" align="center">
@@ -113,7 +122,7 @@
 
                                                 <td></td>
                                                 <td>转到</td>
-                                                <td><input name="intoPage" type="text" id="intoPage" width="5px"/></td>
+                                                <td><input name="intoPage" type="text" id="intoPage" width="5px" style="border-radius: 15px"/></td>
                                                 <td>页</td>
                                                 <td>
                                                     <div class="page"><a href="javascript:void(0)"
@@ -146,8 +155,8 @@
 
             <div class="col-xs-6 col-sm-4 sidebar-offcanvas" id="sidebar">
                 <div class="jumbotron">
-                    <input type="hidden" name="loginResult"  id="loginResult" value="$!loginResult">
-                    <input type="hidden" name="errorMessage"  id="errorMessage" value="$!errorMessage">
+                    <input type="hidden" name="loginResult" id="loginResult" value="$!loginResult">
+                    <input type="hidden" name="errorMessage" id="errorMessage" value="$!errorMessage">
 
                     #if($result=="failed")
                         $control.setTemplate("user:login.vm")
@@ -207,7 +216,7 @@
 <div class="footer" style="
     width: 100%;
     height: 70px;
-    background-color: rgb(42, 42, 79);
+    background-color: rgb(68, 69, 158);
 ">
     $control.setTemplate("bootom.vm")
 </div>
@@ -215,7 +224,7 @@
     $(function () {
         var loginResult = $("#loginResult").val();
         var _errorMessage = $("#errorMessage").val();
-        if (loginResult=="failed")
+        if (loginResult == "failed")
             alert(_errorMessage);
     });
 

@@ -45,14 +45,22 @@
                                     <ul class="list-group">
                                         #foreach ($deliveryPost in $deliveryPosts)
                                             <li class="list-group-item">
-                                                <a href="$resumeLink.addQueryData("id", $!deliveryPost.userId)"
-                                                   title="$!deliveryPost.userName">$!deliveryPost.userName</a>
-
-                                                <div style="color: darkslategrey">学校：$!deliveryPost.university</div>
-                                                <div style="color: coral">专业：$!deliveryPost.specialty</div>
-                                                <div style="color: #6869ff">应聘职位：<a
-                                                        href="$jobInfoLink.addQueryData("id", $!deliveryPost.jobId)  "
-                                                        title="$!deliveryPost.jobName">$!deliveryPost.jobName</a></div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <a href="$resumeLink.addQueryData("id", $!deliveryPost.userId)"
+                                                           title="$!deliveryPost.userName">$!deliveryPost.userName</a>
+                                                        <div style="color: darkslategrey">
+                                                            学校：$!deliveryPost.university</div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div style="color: coral">专业：$!deliveryPost.specialty</div>
+                                                        <div style="color: #6869ff">应聘职位：<a
+                                                                href="$jobInfoLink.addQueryData(
+                                                                    "id", $!deliveryPost.jobId)  "
+                                                                title="$!deliveryPost.jobName">$!deliveryPost.jobName</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </li>
                                         #end
                                     </ul>
@@ -74,7 +82,7 @@
 <div class="footer" style="
     width: 100%;
     height: 70px;
-    background-color: rgb(42, 42, 79);
+    background-color: rgb(68, 69, 158);
 ">
     $control.setTemplate("home:bootom.vm")
 </div>

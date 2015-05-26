@@ -39,17 +39,26 @@
                     <div class="main">
                         <form class="form-horizontal">
                             <h3>发布记录</h3>
+
                             <div class="row">
                                 <div class="col-xs-10 col-lg-12">
                                     <ul class="list-group">
                                         #foreach ($job in $jobs)
                                             <li class="list-group-item">
-                                                <a href="$jobInfoLink.addQueryData("id", $!job.id)  "title="$!job.jobName">$!job.jobName</a>
-                                                <div style="color: darkslategrey">公司：$!job.company</div>
-                                                <div style="color: coral">地址：$!job.address</div>
-                                                <div style="color: #6869ff">薪资：$!job.minMoney  ~ $!job.maxMoney</div>
-                                                <div style="color: #6869ff">发布时间：$!job.time</div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <a href="$jobInfoLink.addQueryData("id", $!job.id)  "
+                                                           title="$!job.jobName">$!job.jobName</a>
 
+                                                        <div style="color: darkslategrey">公司：$!job.company</div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div style="color: coral">地址：$!job.address</div>
+                                                        <div style="color: #6869ff">薪资：$!job.minMoney
+                                                            ~ $!job.maxMoney</div>
+                                                    </div>
+                                                </div>
+                                                <div style="color: #6869ff">发布时间：$!job.time</div>
                                             </li>
                                         #end
                                     </ul>
@@ -63,13 +72,15 @@
             </div>
         </div>
         <!--/jumbotron-->
-    </div><!--body-->
-</div><!--container-->
+    </div>
+    <!--body-->
+</div>
+<!--container-->
 
 <div class="footer" style="
     width: 100%;
     height: 70px;
-    background-color: rgb(42, 42, 79);
+    background-color: rgb(68, 69, 158);
 ">
     $control.setTemplate("home:bootom.vm")
 </div>

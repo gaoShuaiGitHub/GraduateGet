@@ -1112,6 +1112,7 @@ body {
     line-height: 1.42857143;
     color: #333;
     background-color: #fff
+
 }
 
 input, button, select, textarea {
@@ -4932,7 +4933,7 @@ a.list-group-item.active > .badge, .nav-pills > .active > a > .badge {
     padding: 30px 15px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #eee
+    background-color: #abdbdb;
 }
 
 .jumbotron h1, .jumbotron .h1 {
